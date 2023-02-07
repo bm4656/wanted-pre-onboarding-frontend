@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SignIn = () => {
-  return <div></div>;
+  return <div>signin 페이지</div>;
 };
 
 export default SignIn;
