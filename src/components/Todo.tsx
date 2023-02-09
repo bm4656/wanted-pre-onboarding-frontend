@@ -16,6 +16,12 @@ const Todo = ({ id, todo, isCompleted, onUpdate }: any) => {
       <label htmlFor={id}>
         <span>{todo}</span>
       </label>
+      <button data-testid='modify-button' className='rounded bg-slate-300'>
+        수정
+      </button>
+      <button data-testid='delete-button' className='rounded bg-red-300'>
+        삭제
+      </button>
     </li>
   );
 };
