@@ -5,13 +5,13 @@ import Todo from './Todo';
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    },
+  };
   const handleAdd = async (todo: any) => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      },
-    };
     try {
       const result = await axios.post('/todos', todo, config);
       getTodos();
@@ -19,7 +19,25 @@ const TodoList = () => {
       console.log(err);
     }
   };
-
+  const handleUpdate = async (
+    id: number,
+    todo: string,
+    isCompleted: boolean
+  ) => {
+    try {
+      const result = await axios.put(
+        `/todos/${id}`,
+        {
+          todo,
+          isCompleted,
+        },
+        config
+      );
+      getTodos();
+    } catch (err: any) {
+      console.log(err);
+    }
+  };
   const getTodos = async () => {
     try {
       const result = await axios.get('/todos', {
@@ -42,7 +60,15 @@ const TodoList = () => {
       <AddTodo onAdd={handleAdd} />
       <ul>
         {todos &&
-          todos?.map((item: any) => <Todo key={item.id} todo={item.todo} />)}
+          todos?.map((item: any) => (
+            <Todo
+              key={item.id}
+              id={item.id}
+              todo={item.todo}
+              isCompleted={item.isCompleted}
+              onUpdate={handleUpdate}
+            />
+          ))}
       </ul>
     </>
   );
