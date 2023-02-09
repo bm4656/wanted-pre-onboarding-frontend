@@ -1,7 +1,12 @@
 import React from 'react';
+import TodoList from '../components/TodoList';
 
 const TodoPage = () => {
-  return <div>todo 페이지 입니다.</div>;
+  return (
+    <>
+      <TodoList />
+    </>
+  );
 };
 
 export default TodoPage;
