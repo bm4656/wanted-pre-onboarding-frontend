@@ -38,6 +38,18 @@ const TodoList = () => {
       console.log(err);
     }
   };
+  const handleDelete = async (id: number) => {
+    try {
+      const result = await axios.delete(`/todos/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      });
+      getTodos();
+    } catch (err: any) {
+      console.log(err);
+    }
+  };
   const getTodos = async () => {
     try {
       const result = await axios.get('/todos', {
@@ -67,6 +79,7 @@ const TodoList = () => {
               todo={item.todo}
               isCompleted={item.isCompleted}
               onUpdate={handleUpdate}
+              onDelete={handleDelete}
             />
           ))}
       </ul>

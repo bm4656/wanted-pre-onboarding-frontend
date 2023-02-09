@@ -1,9 +1,12 @@
 import React from 'react';
 
-const Todo = ({ id, todo, isCompleted, onUpdate }: any) => {
-  const handleChange = (e: any) => {
+const Todo = ({ id, todo, isCompleted, onUpdate, onDelete }: any) => {
+  const handleUpdate = (e: any) => {
     const isCompleted = e.target.checked;
     onUpdate(id, todo, isCompleted);
+  };
+  const handleDelete = (e: any) => {
+    onDelete(id);
   };
   return (
     <li>
@@ -11,7 +14,7 @@ const Todo = ({ id, todo, isCompleted, onUpdate }: any) => {
         id={id}
         type='checkbox'
         checked={isCompleted}
-        onChange={handleChange}
+        onChange={handleUpdate}
       />
       <label htmlFor={id}>
         <span>{todo}</span>
@@ -19,7 +22,11 @@ const Todo = ({ id, todo, isCompleted, onUpdate }: any) => {
       <button data-testid='modify-button' className='rounded bg-slate-300'>
         수정
       </button>
-      <button data-testid='delete-button' className='rounded bg-red-300'>
+      <button
+        data-testid='delete-button'
+        className='rounded bg-red-300'
+        onClick={handleDelete}
+      >
         삭제
       </button>
     </li>
