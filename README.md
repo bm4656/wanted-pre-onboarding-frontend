@@ -2,7 +2,7 @@
 
 본 프로젝트는 [원티드 프리온보딩 프론트엔드 과정 선발 과제](https://github.com/walking-sunset/selection-task) 수행을 위해 진행되었습니다.
 
-# 과제 
+## 과제 
 
 ### :: 1. 로그인 / 회원가입
 
