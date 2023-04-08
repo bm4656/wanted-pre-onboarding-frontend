@@ -26,6 +26,7 @@ npm install & npm start
 > 과제에 사용 가능한 라이브러리를 사용했습니다.
 > 
 - react
+- typescript
 - react-router
 - axios
 - tailwind css
