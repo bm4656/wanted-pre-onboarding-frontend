@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -38,7 +38,8 @@ const SignUp = () => {
         );
       });
   };
-
+  //로그인 여부에 따라 리다이렉트
+  if (localStorage.getItem('accessToken')) return <Navigate to='/todo' />;
   return (
     <div className='container'>
       <form onSubmit={handleSubmit}>
