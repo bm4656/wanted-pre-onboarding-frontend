@@ -1,7 +1,11 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
 
+const PROXY = window.location.hostname === 'localhost' ? '' : '/proxy';
+const URL = `${PROXY}`;
+
 //api 요청 인스턴스
 const api = axios.create({
+  baseURL: URL,
   withCredentials: true,
   headers: { 'Content-Type': 'application/json' },
 });
