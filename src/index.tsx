@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <NotFound />,
     children: [
-      { index: true, element: <SignIn /> },
+      { index: true, element: <SignUp /> },
       { path: 'signup', element: <SignUp /> },
       { path: 'signin', element: <SignIn /> },
       { path: 'todo', element: <TodoPage /> },

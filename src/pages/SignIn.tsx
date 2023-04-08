@@ -30,34 +30,44 @@ const SignIn = () => {
   //로그인 여부에 따라 리다이렉트
   if (localStorage.getItem('accessToken')) return <Navigate to='/todo' />;
   return (
-    <div className='container'>
-      <h1>로그인</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='email'>Email</label>
-        <input
-          data-testid='email-input'
-          type='email'
-          name='email'
-          placeholder='이메일'
-          value={userInfo.email}
-          onChange={handleChange}
-        />
-        <label htmlFor='password'>Password</label>
-        <input
-          data-testid='password-input'
-          type='password'
-          name='password'
-          placeholder='비밀번호'
-          value={userInfo.password}
-          onChange={handleChange}
-        />
-        <button
-          data-testid='signin-button'
-          className='bg-blue-400 disabled:bg-slate-400'
-        >
-          로그인
-        </button>
-      </form>
+    <div className='flex flex-col justify-center items-center h-[100vh] w-[500px]'>
+      <div className='!z-5 relative rounded-[20px] max-w-[300px] md:max-w-[400px] bg-clip-border shadow-3xl shadow-shadow-500 flex flex-col w-full !p-6 3xl:p-![18px] bg-white'>
+        <div className='relative flex flex-row justify-between'>
+          <h4 className='text-xl font-bold text-navy-700 mb-3'>👏 로그인</h4>
+        </div>
+        <form onSubmit={handleSubmit} className='mb-3'>
+          <label htmlFor='email' className='text-sm text-navy-700 font-bold'>
+            Email
+          </label>
+          <input
+            data-testid='email-input'
+            type='email'
+            name='email'
+            placeholder='이메일'
+            value={userInfo.email}
+            onChange={handleChange}
+            className='mt-2 flex h-12 w-full items-center justify-center rounded-xl border bg-white/0 p-3 text-sm outline-none border-gray-200'
+          />
+          <label htmlFor='password' className='text-sm text-navy-700 font-bold'>
+            Password
+          </label>
+          <input
+            data-testid='password-input'
+            type='password'
+            name='password'
+            placeholder='비밀번호'
+            value={userInfo.password}
+            onChange={handleChange}
+            className='mt-2 flex h-12 w-full items-center justify-center rounded-xl border bg-white/0 p-3 text-sm outline-none border-gray-200'
+          />
+          <button
+            data-testid='signin-button'
+            className='mt-3 flex h-10 w-full items-center justify-center rounded-xl border bg-blue-500 p-3  text-white font-bold hover:bg-blue-700'
+          >
+            로그인
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
