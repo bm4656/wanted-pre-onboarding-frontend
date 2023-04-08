@@ -1,16 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
+import api from '../api/ApiController';
 
 const SignUp = () => {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({ email: '', password: '' });
   const [isEnable, setIsEnable] = useState(true);
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
+
   //유효성 검사로 버튼 활성화 설정
   useEffect(() => {
     const isEmailValid = userInfo.email.includes('@');
@@ -25,9 +22,8 @@ const SignUp = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(userInfo);
-    await axios
-      .post('/auth/signup', userInfo, config)
+    await api
+      .post('/auth/signup', userInfo)
       .then(res => {
         alert('회원가입이 완료 되었습니다.');
         navigate('/signin');

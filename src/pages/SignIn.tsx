@@ -1,15 +1,10 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
+import api from '../api/ApiController';
 
 const SignIn = () => {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({ email: '', password: '' });
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -18,8 +13,8 @@ const SignIn = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await axios
-      .post('/auth/signin', userInfo, config)
+    await api
+      .post('/auth/signin', userInfo)
       .then(res => {
         localStorage.setItem('accessToken', res.data.access_token);
         alert('로그인이 완료 되었습니다.');

@@ -1,56 +1,46 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import Todo from '../components/Todo';
 import AddTodo from '../components/AddTodo';
+import api from '../api/ApiController';
 
 const TodoPage = () => {
   const [todos, setTodos] = useState([]);
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-    },
-  };
+  //TODO 추가하기 요청
   const handleAdd = async (added: { todo: string }) => {
-    await axios
-      .post('/todos', added, config)
+    await api
+      .post('/todos', added)
       .then(res => {
         getTodos();
       })
       .catch(err => console.log(err));
   };
+  //TODO 업데이트 요청
   const handleUpdate = async (updated: {
     id: number;
     todo: string;
     isCompleted: boolean;
   }) => {
-    await axios
-      .put(`/todos/${updated.id}`, updated, config)
+    await api
+      .put(`/todos/${updated.id}`, updated)
       .then(res => {
         getTodos();
       })
       .catch(err => console.log(err));
   };
+  //TODO 삭제 요청
   const handleDelete = async (id: number) => {
-    await axios
-      .delete(`/todos/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-      })
+    await api
+      .delete(`/todos/${id}`)
       .then(res => {
         getTodos();
       })
       .catch(err => console.log(err));
   };
+  //TODO 리스트 가져오기 요청
   const getTodos = async () => {
-    await axios
-      .get('/todos', {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-      })
+    await api
+      .get('/todos')
       .then(res => {
         setTodos(res.data);
       })
@@ -60,6 +50,7 @@ const TodoPage = () => {
   useEffect(() => {
     getTodos();
   }, []);
+
   //로그인 여부에 따라 리다이렉트
   if (!localStorage.getItem('accessToken')) return <Navigate to='/signin' />;
   return (
@@ -68,14 +59,16 @@ const TodoPage = () => {
       <AddTodo onAdd={handleAdd} />
       <ul>
         {todos &&
-          todos?.map((item: any) => (
-            <Todo
-              key={item.id}
-              item={item}
-              onUpdate={handleUpdate}
-              onDelete={handleDelete}
-            />
-          ))}
+          todos?.map(
+            (item: { id: number; todo: string; isCompleted: boolean }) => (
+              <Todo
+                key={item.id}
+                item={item}
+                onUpdate={handleUpdate}
+                onDelete={handleDelete}
+              />
+            )
+          )}
       </ul>
     </>
   );
