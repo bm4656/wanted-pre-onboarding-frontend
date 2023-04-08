@@ -6,12 +6,9 @@ const Navbar = () => {
   const navigate = useNavigate();
   if (isLogin)
     return (
-      <nav className='flex justify-around p-2 bg-slate-200 text-blue-500 text-lg'>
-        <Link to='/' className='focus:text-purple-500'>
-          Intro
-        </Link>
-        <Link to='/todo' className='focus:text-purple-500'>
-          투두리스트
+      <nav className='flex flex-row justify-end items-end w-[500px] gap-4 mt-3'>
+        <Link to='/todo' className='text-m font-semibold'>
+          🚀 투두리스트
         </Link>
         <button
           onClick={() => {
@@ -19,22 +16,20 @@ const Navbar = () => {
             alert('로그아웃 되었습니다.');
             navigate('/');
           }}
+          className='text-m font-semibold'
         >
-          로그아웃
+          ⚙️ 로그아웃
         </button>
       </nav>
     );
   else
     return (
-      <nav className='flex justify-around p-2 bg-slate-200 text-blue-500 text-lg'>
-        <Link to='/' className='focus:text-purple-500'>
-          Intro
+      <nav className='flex flex-row justify-end items-end w-[500px] gap-4 mt-3'>
+        <Link to='/signup' className='text-m  font-semibold'>
+          🌱 회원가입
         </Link>
-        <Link to='/signup' className='focus:text-purple-500'>
-          회원가입
-        </Link>
-        <Link to='/signin' className='focus:text-purple-500'>
-          로그인
+        <Link to='/signin' className='text-m  font-semibold'>
+          🔆 로그인
         </Link>
       </nav>
     );
