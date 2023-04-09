@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import api from '../api/ApiController';
+import useIsLogin from '../hooks/useIsLogin';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -26,9 +27,7 @@ const SignIn = () => {
         );
       });
   };
-
-  //로그인 여부에 따라 리다이렉트
-  if (localStorage.getItem('accessToken')) return <Navigate to='/todo' />;
+  useIsLogin();
   return (
     <div className='flex flex-col justify-center items-center h-[100vh] w-[500px]'>
       <div className='!z-5 relative rounded-[20px] max-w-[300px] md:max-w-[400px] bg-clip-border shadow-3xl shadow-shadow-500 flex flex-col w-full !p-6 3xl:p-![18px] bg-white'>

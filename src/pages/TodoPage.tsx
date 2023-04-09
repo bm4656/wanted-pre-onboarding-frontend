@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
 import Todo from '../components/Todo';
 import AddTodo from '../components/AddTodo';
 import api from '../api/ApiController';
+import useIsLogin from '../hooks/useIsLogin';
 
 const TodoPage = () => {
   const [todos, setTodos] = useState([]);
@@ -39,20 +39,16 @@ const TodoPage = () => {
   };
   //TODO 리스트 가져오기 요청
   const getTodos = async () => {
-    await api
-      .get('/todos')
-      .then(res => {
-        setTodos(res.data);
-      })
-      .catch(err => console.log(err));
+    await api.get('/todos').then(res => {
+      setTodos(res.data);
+    });
   };
 
   useEffect(() => {
     getTodos();
   }, []);
 
-  //로그인 여부에 따라 리다이렉트
-  if (!localStorage.getItem('accessToken')) return <Navigate to='/signin' />;
+  useIsLogin();
   return (
     <div className='flex flex-col justify-center items-center h-[80vh]'>
       <div className='!z-5 relative  rounded-[20px] max-w-[300px] min-h-[50vh] bg-clip-border shadow-3xl shadow-shadow-500 flex flex-col w-full !p-4 3xl:p-![18px] bg-white'>
